@@ -26,13 +26,26 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
+
+                    @if(\Request::is('/'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('home')}}">Dashboard</a>
+                    </li>
+                    @endif
                 @else
-                    <li class="nav-item">
-                        <a id="set_waypoint" class="nav-link" href="#">Set Waypoint</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="set_path" class="nav-link" href="#">Set Path</a>
-                    </li>
+                    @if(\Request::is('home'))
+                        <li class="nav-item">
+                            <a id="set_waypoint" class="nav-link" href="#">Set Waypoint</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="set_path" class="nav-link" href="#">Set Path</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">Dashboard</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
