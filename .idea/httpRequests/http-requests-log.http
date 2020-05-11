@@ -1,0 +1,108 @@
+POST http://localhost:8000/pins/
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T053631.419.html
+
+###
+
+GET http://localhost:8000/home/
+Content-Type: application/x-www-form-urlencoded
+
+<> 2020-05-06T053505.200.html
+
+###
+
+POST http://localhost:8000/pins/
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T053449.419.html
+
+###
+
+POST http://localhost:8000/pins/
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T045207.419.html
+
+###
+
+GET http://localhost:8000/home/
+Content-Type: application/x-www-form-urlencoded
+
+<> 2020-05-06T044426.200.html
+
+###
+
+GET http://localhost:8000/dashbaord/
+Content-Type: application/x-www-form-urlencoded
+
+<> 2020-05-06T044401.404.html
+
+###
+
+POST http://localhost:8000/pins/
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T044243.419.html
+
+###
+
+POST http://localhost:8000/pins
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T044134.419.html
+
+###
+
+POST http://localhost:8000/pins
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T042733.419.html
+
+###
+
+GET http://localhost:8080/resources
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8000/pins
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+<> 2020-05-06T042645.419.html
+
+###
+
+POST http://localhost:8080/pins?lati=12&long=13&desc=qsdwxc
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/pin?lati=12&long=13&desc=qsdwxc
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/resources?lati=12&long=13&desc=qsdwxc
+Accept: */*
+Cache-Control: no-cache
+
+###
+
