@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/transport', function () {
+    return view('transport')->with("buses", \App\Bus::all())
+        ->with("drivers", \App\Driver::all());
+})->name('transport');
 
 Auth::routes();
 
@@ -27,3 +28,6 @@ Route::get('pins/reset', 'PinController@reset');
 Route::resource('pins', 'PinController');
 Route::get('paths/reset', 'PathController@reset');
 Route::resource('paths', 'PathController');
+
+Route::resource('buses', 'BusController');
+Route::resource('drivers', 'DriverController');

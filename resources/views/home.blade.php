@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Map
+@endsection
 @section('content')
     <style>
         #mapid {
