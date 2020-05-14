@@ -10,7 +10,7 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
     - name: Copy .env
@@ -20,4 +20,6 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        APP_KEY: base64:7z1+HrBS8o+I9qW74Hs2vjL9NChgutXuz/SESMlSMvU=
       run: vendor/bin/phpunit
