@@ -443,6 +443,10 @@
     <configuration name="rest-api_1#2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="BasicTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\BasicTest" file="$PROJECT_DIR$/tests/Feature/BasicTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
     <configuration name="BasicTest.testExample" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\BasicTest" file="$PROJECT_DIR$/tests/Feature/BasicTest.php" method="testExample" scope="Method" />
       <method v="2" />
@@ -450,6 +454,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="PHPUnit.BasicTest.testExample" />
+        <item itemvalue="PHPUnit.BasicTest" />
         <item itemvalue="HTTP Request.rest-api_1#1" />
         <item itemvalue="HTTP Request.rest-api_1#2" />
         <item itemvalue="HTTP Request.All in rest-api_1" />
@@ -481,7 +486,7 @@
       <workItem from="1589214164213" duration="15303000" />
       <workItem from="1589282859098" duration="15639000" />
       <workItem from="1589391779264" duration="4152000" />
-      <workItem from="1589454367659" duration="1442000" />
+      <workItem from="1589454367659" duration="15527000" />
     </task>
     <servers />
   </component>
@@ -521,38 +526,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="59" y="210" key="#SQL_Dialects/0.0.1366.738@0.0.1366.738" timestamp="1588961487502" />
-    <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589218993329">
+    <state x="274" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589478688880">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1589218993329" />
-    <state x="429" y="168" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589222491984">
+    <state x="274" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1589478688880" />
+    <state x="429" y="168" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589465786020">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="429" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1589222491984" />
-    <state x="413" y="124" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589232310533">
+    <state x="429" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1589465786020" />
+    <state x="413" y="124" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589488926258">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="413" y="124" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.738@0.0.1366.738" timestamp="1589232310533" />
+    <state x="413" y="124" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.738@0.0.1366.738" timestamp="1589488926258" />
     <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1589392231780">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1589392231780" />
-    <state width="556" height="182" key="GridCell.Tab.0.bottom" timestamp="1588967159916">
+    <state width="800" height="190" key="GridCell.Tab.0.bottom" timestamp="1589479996770">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="556" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588967159916" />
-    <state width="556" height="182" key="GridCell.Tab.0.center" timestamp="1588967159916">
+    <state width="800" height="190" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589479996770" />
+    <state width="800" height="190" key="GridCell.Tab.0.center" timestamp="1589479996770">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="556" height="182" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1588967159916" />
-    <state width="556" height="182" key="GridCell.Tab.0.left" timestamp="1588967159916">
+    <state width="800" height="190" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1589479996770" />
+    <state width="800" height="190" key="GridCell.Tab.0.left" timestamp="1589479996770">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="556" height="182" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1588967159916" />
-    <state width="556" height="182" key="GridCell.Tab.0.right" timestamp="1588967159916">
+    <state width="800" height="190" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1589479996770" />
+    <state width="800" height="190" key="GridCell.Tab.0.right" timestamp="1589479996770">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="556" height="182" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1588967159916" />
+    <state width="800" height="190" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1589479996770" />
     <state x="499" y="291" key="NewPhpFileDialog" timestamp="1589392111002">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -569,9 +574,13 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="462" y="176" width="441" height="382" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1366.738@0.0.1366.738" timestamp="1589232487054" />
-    <state x="526" y="181" width="520" height="378" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588960660406">
+    <state x="526" y="181" width="520" height="378" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589470415158">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="526" y="181" width="520" height="378" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.738@0.0.1366.738" timestamp="1588960660406" />
+    <state x="526" y="181" width="520" height="378" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.738@0.0.1366.738" timestamp="1589470415158" />
+    <state x="92" y="92" width="1182" height="554" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589480446568">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="92" y="92" width="1182" height="554" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1589480446568" />
   </component>
 </project>

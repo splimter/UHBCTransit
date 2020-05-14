@@ -17,9 +17,9 @@
                 <td>{{$bus->nmbrPlace}}</td>
                 <td>{{$bus->nmbrPlaceDebout}}</td>
                 <td class="d-flex justify-content-around">
-                    <button onclick="updateDriver({{$bus->id}},
+                    <button onclick="updateBus({{$bus->id}},
                         [{{$bus->matricule}}, {{$bus->nmbrPlace}}, {{$bus->nmbrPlaceDebout}}])"
-                        class="btn btn-warning pb-0"><span class="material-icons">create</span>
+                            class="btn btn-warning pb-0"><span class="material-icons">create</span>
                     </button>
                     <button onclick="deleteBus({{$bus->id}})" class="btn btn-danger pb-0">
                         <span class="material-icons">remove_circle</span>
@@ -33,7 +33,7 @@
             <td></td>
             <td></td>
             <td class="d-flex justify-content-center">
-                <button class="btn btn-success pb-0"
+                <button class="btn btn-success pb-0" onclick="addBus()"
                         data-toggle="modal" data-target="#busModal"><span class="material-icons">add_circle</span>
                 </button>
             </td>
@@ -57,76 +57,97 @@
                 <form id="bus-form" action="{{route('buses.store')}}" method="post" novalidate>
                     @csrf
                     <label for="matricule">Matricule</label>
-                    <input type="text" class="form-control" id="matricule" name="matricule"
+                    <input type="number" class="form-control" id="matricule" name="matricule"
                            placeholder="matricule de place..." required>
                     <label for="nbmr">Nombre de place assit</label>
-                    <input type="text" class="form-control" id="nbmr" name="nmbrPlace" placeholder="nombre de place..."
+                    <input type="number" class="form-control" id="nbmr" name="nmbrPlace"
+                           placeholder="nombre de place..."
                            required>
                     <label for="nbmrdebout">Nombre de place debout</label>
-                    <input type="text" class="form-control" id="nbmrdebout" name="nmbrPlaceDebout"
+                    <input type="number" class="form-control" id="nbmrdebout" name="nmbrPlaceDebout"
                            placeholder="nombre de place..." required>
                 </form>
             </div>
             <div class="modal-footer">
                 <button id="btn_close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btn_submit_bus" form="bus-form" class="btn btn-primary">Add</button>
+                <button id="btn_submit_bus" class="btn btn-primary">Add</button>
             </div>
             <script>
-                let submit = $("#btn_submit_bus")
-                let iid = null
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-                submit.click(function (event) {
+                let submitb = $("#btn_submit_bus")
+                let iidb = null
+
+                submitb.click(function (event) {
                     event.preventDefault();
                     let data = $('#bus-form').serializeArray()
                     data.shift()
 
-                    var flated = {}
-                    Object.keys({...data}).forEach(function(key) {
-                        flated[Object.values({...data}[key])[0]] = Object.values({...data}[key])[1]
+                    var flatted = {}
+                    Object.keys({...data}).forEach(function (key) {
+                        flatted[Object.values({...data}[key])[0]] = Object.values({...data}[key])[1]
                     });
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    if (submit.text() === "Add")
-                    $.ajax({
-                        url: '/buses/',
-                        type: 'POST',
-                        data: flated
-                    })
-                    else if (submit.text() === "Update")
+                    console.log(flatted)
+                    if (submitb.text() === "Add")
                         $.ajax({
                             url: '/buses/',
-                            type: 'PUT' + iid,
-                            data: flatted
+                            type: 'POST',
+                            data: flated
+                        }).done(function (data, textStatus, jqXHR) {
+                            $("#matricule").val("")
+                            $("#nbmr").val("")
+                            $("#nbmrdebout").val("")
+                            reset()
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR.responseJSON.error)
                         })
-                    iid = null
+                    else if (submitb.text() === "Update")
+                        $.ajax({
+                            url: '/buses/' + iidb,
+                            type: 'PUT',
+                            data: flatted
+                        }).done(function (data, textStatus, jqXHR) {
+                            reset()
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR.responseJSON.error)
+                        })
 
-                    $("#matricule").val("")
-                    $("#nmbrPlace").val("")
-                    $("#nmbrPlaceDebout").val("")
-                    submit.val("Add")
+                })
 
+                function addBus() {
+                    submitb.html('Add');
+                }
+
+                function reset() {
                     $("#busModal").modal('hide')
                     $('#bus_container').load(document.URL + ' #bus_container > *');
-                })
+                    iidb = null
+                    submitb.html('Add');
+                }
+
                 function deleteBus(id) {
                     $.ajax({
                         url: '/buses/' + id,
                         type: 'DELETE'
                     })
+                    $('#bus_container').load(document.URL + ' #bus_container > *');
                 }
 
-                function updateDriver(id, data) {
-                    $("#driverModal").modal('toggle')
+                function updateBus(id, data) {
                     $("#matricule").val(data[0])
-                    $("#nmbrPlace").val(data[1])
-                    $("#nmbrPlaceDebout").val(data[2])
+                    $("#nbmr").val(data[1])
+                    $("#nbmrdebout").val(data[2])
+                    submitb.html('Update');
 
-                    submit.val("Update")
-                    iid = id
+                    $("#busModal").modal('toggle')
+
+                    iidb = id
+                    $('#bus_container').load(document.URL + ' #bus_container > *');
                 }
             </script>
             {{--// Example starter JavaScript for disabling form submissions if there are invalid fields--}}
@@ -135,9 +156,9 @@
                     'use strict';
                     window.addEventListener('load', function () {
                         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
+                        const forms = document.getElementsByClassName('needs-validation');
                         // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function (form) {
+                        const validation = Array.prototype.filter.call(forms, function (form) {
                             form.addEventListener('submit', function (event) {
                                 if (form.checkValidity() === false) {
                                     event.preventDefault();

@@ -20,9 +20,8 @@
                 <td>{{$driver->exp}}</td>
                 <td class="d-flex justify-content-center">
                     <button onclick="updateDriver({{$driver->id}},
-                        [{{$driver->nom}}, {{$driver->prenom}}, {{$driver->adress}}, {{$driver->exp}}])"
-                            class="btn btn-warning pb-0"
-                            data-toggle="modal" data-target="#busModal"><span class="material-icons">create</span>
+                        ['{{$driver->nom}}', '{{$driver->prenom}}', '{{$driver->adress}}', {{$driver->exp}}])"
+                            class="btn btn-warning pb-0"><span class="material-icons">create</span>
                     </button>
                     <button onclick="deleteDriver({{$driver->id}})" class="btn btn-danger pb-0">
                         <span class="material-icons">remove_circle</span>
@@ -37,7 +36,7 @@
             <td></td>
             <td></td>
             <td class="d-flex justify-content-center">
-                <button class="btn btn-success pb-0"
+                <button class="btn btn-success pb-0" onclick="addDriver()"
                         data-toggle="modal" data-target="#driverModal"><span class="material-icons">add_circle</span>
                 </button>
             </td>
@@ -74,10 +73,16 @@
                 <button id="btn_submit_driver" class="btn btn-primary">Add</button>
             </div>
             <script>
-                let submit = $("#btn_submit_driver")
-                let iid = null
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-                submit.click(function (event) {
+                let submitd = $("#btn_submit_driver")
+                let iidd = null
+
+                submitd.click(function (event) {
                     event.preventDefault();
 
                     let data = $('#driver-form').serializeArray()
@@ -88,50 +93,67 @@
                         flatted[Object.values({...data}[key])[0]] = Object.values({...data}[key])[1]
                     });
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    if (submit.text() === "Add")
+
+                    if (submitd.text() === "Add")
                         $.ajax({
                             url: '/drivers/',
                             type: 'POST',
                             data: flatted
-                        })
-                    else if (submit.text() === "Update")
-                        $.ajax({
-                            url: '/drivers/',
-                            type: 'PUT' + iid,
-                            data: flatted
-                        })
-                    iid = null
+                        }).done(function (data, textStatus, jqXHR) {
+                            $("#nom").val("")
+                            $("#prenom").val("")
+                            $("#adress").val("")
+                            $("#exp").val("")
 
-                    $("#nom").val("")
-                    $("#prenom").val("")
-                    $("#adress").val("")
-                    $("#exp").val("")
-                    submit.val("Add")
+                            reset()
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR.responseJSON.error)
+                        })
+                    else if (submitd.text() === "Update")
+                        $.ajax({
+                            url: '/drivers/'+ iidd,
+                            type: 'PUT' ,
+                            data: flatted
+                        }).done(function (data, textStatus, jqXHR) {
+                            reset()
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert(jqXHR.responseJSON.error)
+                        })
 
                     $("#driverModal").modal('hide')
                     $('#driver_container').load(document.URL + ' #driver_container > *');
                 })
+
+                function addDriver() {
+                    submitd.html('Add');
+                }
+
+                function reset() {
+                    $("#driverModal").modal('hide')
+                    $('#driver_container').load(document.URL + ' #driver_container > *');
+
+                    iidd = null
+                    submitd.html("Add")
+                }
 
                 function deleteDriver(id) {
                     $.ajax({
                         url: '/drivers/' + id,
                         type: 'DELETE'
                     })
+                    $('#driver_container').load(document.URL + ' #driver_container > *');
                 }
 
                 function updateDriver(id, data) {
-                    $("#driverModal").modal('toggle')
                     $("#nom").val(data[0])
                     $("#prenom").val(data[1])
                     $("#adress").val(data[2])
                     $("#exp").val(data[3])
-                    submit.val("Update")
-                    iid = id
+                    submitd.html("Update")
+
+                    $("#driverModal").modal('toggle')
+                    iidd = id
+                    $('#driver_container').load(document.URL + ' #driver_container > *');
                 }
             </script>
         </div>

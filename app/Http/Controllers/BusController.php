@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Bus;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class BusController extends Controller
 {
@@ -33,27 +36,33 @@ class BusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'matricule' => 'required|unique:buses,matricule',
-            'nmbrPlace'  => 'required|numeric',
-            'nmbrPlaceDebout'  => 'required|numeric'
+        $validator = Validator::make($request->all(), [
+            'matricule' => 'required|numeric|unique:buses,matricule',
+            'nmbrPlace' => 'required|numeric',
+            'nmbrPlaceDebout' => 'required|numeric'
         ]);
 
-        Bus::create([
-            'matricule' => $request->matricule,
-            'nmbrPlace' => $request->nmbrPlace,
-            'nmbrPlaceDebout' => $request->nmbrPlaceDebout
-        ]);
+        if ($validator->fails()) {
+            Session::flash('error', $validator->messages()->first());
+            //return redirect()->back()->withInput();
+            return Response::json(['error' => $validator->messages()->first()],422);
+        } else {
+            Bus::create([
+                'matricule' => $request->matricule,
+                'nmbrPlace' => $request->nmbrPlace,
+                'nmbrPlaceDebout' => $request->nmbrPlaceDebout
+            ]);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -64,7 +73,7 @@ class BusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -76,18 +85,30 @@ class BusController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Bus $bus)
     {
-        $bus->update($request->all());
+        $validator = Validator::make($request->all(), [
+            'matricule' => 'required|numeric',
+            'nmbrPlace' => 'required|numeric',
+            'nmbrPlaceDebout' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('error', $validator->messages()->first());
+            //return redirect()->back()->withInput();
+            return Response::json(['error' => $validator->messages()->first()],422);
+        } else {
+            $bus->update($request->all());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy(Bus $bus)
@@ -95,7 +116,8 @@ class BusController extends Controller
         $bus->delete();
     }
 
-    public function reset(){
+    public function reset()
+    {
         DB::statement("ALTER TABLE pins AUTO_INCREMENT = 1");
     }
 }

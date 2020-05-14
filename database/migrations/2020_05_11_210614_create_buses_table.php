@@ -15,9 +15,9 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string("matricule");
+            $table->integer("matricule");
             $table->integer("nmbrPlace");
-            $table->integer("nmbrPlaceDoubout");
+            $table->integer("nmbrPlaceDebout");
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DriverController extends Controller
 {
@@ -36,6 +37,11 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'matricule' => 'required|numeric|unique:buses,matricule',
+            'nmbrPlace' => 'required|numeric',
+            'nmbrPlaceDebout' => 'required|numeric'
+        ]);
         Driver::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
