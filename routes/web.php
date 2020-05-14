@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/transport', function () {
     return view('transport')->with("buses", \App\Bus::all())
         ->with("drivers", \App\Driver::all());
-})->name('transport');
+})->middleware('auth')->name('transport');
 
 Auth::routes();
 
