@@ -18,6 +18,8 @@ class CreatePinsTable extends Migration
             $table->string('lati');
             $table->string('long');
             $table->string('desc');
+            $table->string('start-time');
+            $table->string('end-time');
             $table->timestamps();
         });
     }

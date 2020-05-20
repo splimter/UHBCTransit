@@ -40,7 +40,9 @@ class PinController extends Controller
         Pin::create([
             'lati' => $request->lati,
             'long' => $request->long,
-            'desc' => $request->desc
+            'desc' => $request->desc,
+            'start' => $request->start,
+            'end' => $request->end
         ]);
     }
 

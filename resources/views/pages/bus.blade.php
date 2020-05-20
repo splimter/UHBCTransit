@@ -97,7 +97,7 @@
                         $.ajax({
                             url: '/buses/',
                             type: 'POST',
-                            data: flated
+                            data: flatted
                         }).done(function (data, textStatus, jqXHR) {
                             $("#matricule").val("")
                             $("#nbmr").val("")
@@ -117,6 +117,8 @@
                             alert(jqXHR.responseJSON.error)
                         })
 
+                    $("#busModal").modal('hide')
+                    $('#bus_container').load(document.URL + ' #bus_container > *');
                 })
 
                 function addBus() {
@@ -145,7 +147,6 @@
                     submitb.html('Update');
 
                     $("#busModal").modal('toggle')
-
                     iidb = id
                     $('#bus_container').load(document.URL + ' #bus_container > *');
                 }

@@ -2,6 +2,8 @@ let set_waypoint = document.getElementById('set_waypoint')
 let set_path = document.getElementById('set_path')
 let btn_close = document.getElementById('btn_close')
 let txt_desc = document.getElementById('txt_desc')
+let txt_start = document.getElementById('txt_start')
+let txt_end = document.getElementById('txt_end')
 let btn_submit = document.getElementById('btn_submit')
 let sideOptions = document.getElementById('sideOptions')
 let exampleModalLabel = document.getElementById("exampleModalLabel")
@@ -14,6 +16,8 @@ if (set_waypoint)
         btn_submit.innerHTML = "Add"
         exampleModalLabel.innerHTML = "Add a Pin"
         txt_desc.value = ""
+        txt_start.value = ""
+        txt_end.value = ""
         $('#exampleModal').modal('toggle')
     })
 if (set_path)
@@ -28,8 +32,11 @@ txt_desc.addEventListener('input', e => {
     btn_submit.disabled = txt_desc.value === "";
 })
 btn_submit.addEventListener('click', e => {
-    if (btn_submit.innerHTML === "Add")
+    if (btn_submit.innerHTML === "Add") {
         desc = txt_desc.value;
+        start = txt_start.value;
+        end = txt_end.value;
+    }
     if (btn_submit.innerHTML === "Update") {
         var mark = null
         // update desc in objPins

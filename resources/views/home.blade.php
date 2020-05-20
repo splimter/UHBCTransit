@@ -35,7 +35,7 @@
             $.ajax({
                 url: '/pins/',
                 type: 'POST',
-                data: {lati: lati, long: long, desc: desc}
+                data: {lati, long, desc, start, end}
             })
         }
 
@@ -109,7 +109,7 @@
             @endif
         }
 
-        function makePin(id, lati, long, desc) {
+        function makePin(id, lati, long, desc, start, end) {
             const mark = L.marker([lati, long]).bindPopup(desc)
             marks.push({id: id, mark: mark})
             L.layerGroup([mark]).addTo(mymap);
@@ -119,7 +119,7 @@
             item.setAttribute('class', "list-group-item d-flex align-items-center")
 
             if (isAuth)
-                item.innerHTML = `<span class="material-icons">place</span>${desc}
+                item.innerHTML = `<span class="material-icons">place</span>${desc} (${start} - ${end})
             <span id="span_e${id}" class="material-icons">edit</span>
             <span id="span_rc${id}" class="material-icons">remove_circle_outline</span>`
             else
@@ -184,7 +184,8 @@
             }).addTo(mymap);
 
 
-            let mode = "", chk = 0, t1 = [], t2 = [], desc;
+            let mode = "", chk = 0, t1 = [], t2 = [];
+            let desc, start, end;
             // e.latlng.lat, e.latlng.lng
             mymap.on('click', function (e) {
                 console.log("chk", chk)
@@ -203,9 +204,9 @@
                         setPath(t1[0], t1[1], t2[0], t2[1])
                     }
                 if (mode === 'waypoint') {
-                    makePin(e.latlng.lat + e.latlng.lng, e.latlng.lat, e.latlng.lng, desc)
+                    makePin(e.latlng.lat + e.latlng.lng, e.latlng.lat, e.latlng.lng, desc, start, end)
                     mode = ""
-                    setPins(e.latlng.lat, e.latlng.lng, desc)
+                    setPins(e.latlng.lat, e.latlng.lng, desc, start, end)
                 }
             });
 
@@ -227,12 +228,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" novalidate>
-                        <label for="txt_desc">City</label>
+                    <form>
+                        <label for="txt_desc">Place Name</label>
                         <input type="text" class="form-control" id="txt_desc" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
+                        <label for="txt_start">Start Time</label>
+                        <input type="text" class="form-control" id="txt_start" required>
+                        <label for="txt_end">End Time</label>
+                        <input type="text" class="form-control" id="txt_end" required>
                     </form>
                 </div>
                 <div class="modal-footer">

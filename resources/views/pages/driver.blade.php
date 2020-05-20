@@ -18,7 +18,7 @@
                 <td>{{$driver->prenom}}</td>
                 <td>{{$driver->adress}}</td>
                 <td>{{$driver->exp}}</td>
-                <td class="d-flex justify-content-center">
+                <td class="d-flex justify-content-around">
                     <button onclick="updateDriver({{$driver->id}},
                         ['{{$driver->nom}}', '{{$driver->prenom}}', '{{$driver->adress}}', {{$driver->exp}}])"
                             class="btn btn-warning pb-0"><span class="material-icons">create</span>
