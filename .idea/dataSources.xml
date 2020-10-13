@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="uhbctrasit@localhost" uuid="004964a2-65a4-420f-a816-f3a0a1d04ade">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/uhbctrasit</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="sql7339636@sql7.freemysqlhosting.net" uuid="8f879025-827e-4083-9e06-241698f9b5e5">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7339636</jdbc-url>
+    </data-source>
+  </component>
+</project>
